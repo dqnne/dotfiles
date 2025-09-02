@@ -48,11 +48,6 @@ vim.o.foldmethod = 'indent'
 vim.o.foldlevel = 99
 vim.g.markdown_folding = 1
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('init', {}),
-  callback = function() vim.hl.on_yank() end,
-})
-
 vim.lsp.enable({
   'clangd',
   'lua_ls',
@@ -100,23 +95,6 @@ end, { desc = 'Toggle quickfix window' })
 -- Compile ---------------------------------------------------------------------
 map('n', '<leader>c', '<cmd>Compile<cr>', { desc = 'Compile' })
 map('n', '<leader>m', '<cmd>SetMakeprg<cr>', { desc = 'Set makeprg' })
-
--- LSP -------------------------------------------------------------------------
-map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP code action' })
-map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'LSP declaration' })
-map('n', '<leader>lS', vim.lsp.buf.document_symbol, { desc = 'LSP document symbols' })
-map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'LSP definition' })
-map('n', '<leader>ln', vim.lsp.buf.rename, { desc = 'LSP rename' })
-map('n', '<leader>lr', vim.lsp.buf.references, { desc = 'LSP references' })
-map('n', '<leader>ls', vim.lsp.buf.workspace_symbol, { desc = 'LSP workspace symbols' })
-map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'LSP type definition' })
-
-map(
-  'n',
-  '<leader>lh',
-  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-  { desc = 'LSP toggle inlay hints' }
-)
 
 -- Picker ----------------------------------------------------------------------
 map('n', '<leader>/', '<cmd>Pick grep_live<cr>', { desc = 'Grep live' })
@@ -172,9 +150,39 @@ local isnt_installed = function(lang) return #vim.api.nvim_get_runtime_file('par
 local to_install = vim.tbl_filter(isnt_installed, ensure_installed)
 if #to_install > 0 then require('nvim-treesitter').install(to_install) end
 
+-- Autocommands ================================================================
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('highlight-yank', {}),
+  callback = function() vim.hl.on_yank() end,
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp', {}),
+  callback = function(ev)
+    map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP code action' })
+    map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'LSP declaration' })
+    map('n', '<leader>lS', vim.lsp.buf.document_symbol, { desc = 'LSP document symbols' })
+    map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'LSP definition' })
+    map('n', '<leader>ln', vim.lsp.buf.rename, { desc = 'LSP rename' })
+    map('n', '<leader>lr', vim.lsp.buf.references, { desc = 'LSP references' })
+    map('n', '<leader>ls', vim.lsp.buf.workspace_symbol, { desc = 'LSP workspace symbols' })
+    map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'LSP type definition' })
+
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method('textDocument/inlayHint', ev.buf) then
+      map(
+        'n',
+        '<leader>lh',
+        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+        { desc = 'LSP toggle inlay hints' }
+      )
+    end
+  end,
+})
+
 -- Autostart highlighting if parser exists
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('treesitter', {}),
+  group = vim.api.nvim_create_augroup('treesitter-autostart', {}),
   callback = function(ev)
     if pcall(vim.treesitter.get_parser, ev.buf) then vim.treesitter.start(ev.buf) end
   end,
@@ -182,7 +190,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Treesitter update hook
 vim.api.nvim_create_autocmd('PackChanged', {
-  group = vim.api.nvim_create_augroup('treesitter', { clear = false }),
+  group = vim.api.nvim_create_augroup('treesitter-update', {}),
   callback = function(ev)
     if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then vim.cmd('TSUpdate') end
   end,
