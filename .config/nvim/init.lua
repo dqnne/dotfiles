@@ -9,10 +9,14 @@ vim.pack.add({
 
 -- OPTIONS =====================================================================
 vim.g.mapleader = ' '
+vim.g.markdown_folding = 1
 
+-- Editing
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 vim.o.clipboard = 'unnamedplus'
 vim.o.undofile = true
-vim.o.completeopt = 'menuone,noselect,fuzzy'
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort'
 vim.o.infercase = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -20,6 +24,7 @@ vim.o.virtualedit = 'block'
 vim.o.breakindent = true
 vim.o.smartindent = true
 
+-- UI
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
@@ -29,7 +34,8 @@ vim.o.winborder = 'single'
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.tabclose = 'left'
-
+vim.o.foldmethod = 'indent'
+vim.o.foldlevel = 99
 vim.o.list = true
 vim.opt.listchars = {
   lead = ' ',
@@ -39,14 +45,7 @@ vim.opt.listchars = {
   trail = '·',
 }
 
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-
 vim.diagnostic.config({ virtual_text = { current_line = true, severity = { min = 1, max = 1 } } })
-
-vim.o.foldmethod = 'indent'
-vim.o.foldlevel = 99
-vim.g.markdown_folding = 1
 
 vim.lsp.enable({
   'clangd',
