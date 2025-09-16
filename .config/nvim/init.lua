@@ -55,6 +55,8 @@ vim.lsp.enable({
   'ty',
 })
 
+vim.lsp.on_type_formatting.enable()
+
 vim.cmd.colorscheme('custom')
 
 -- KEYMAPS =====================================================================
