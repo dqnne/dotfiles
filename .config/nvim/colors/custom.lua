@@ -29,10 +29,10 @@ local p = {
 
   dark_red = '#2d1e1e',
   dark_green = '#1e2d1e',
+  dark_yellow = '#2d2d1e',
   dark_blue = '#1e1e2d',
+  dark_magenta = '#2d1e2d',
   dark_cyan = '#1e2d2d',
-  -- dark_yellow = '#2d2d1e',
-  -- dark_magenta = '#2d1e2d',
 }
 
 local function hi(group, data) vim.api.nvim_set_hl(0, group, data) end
@@ -44,7 +44,7 @@ local function enable_colorscheme()
 
   hi('Added',                    { fg = p.light_green })
   hi('Boolean',                  { fg = p.gray_2 })
-  hi('Changed',                  { fg = p.light_blue })
+  hi('Changed',                  { fg = p.light_cyan })
   hi('Character',                { fg = p.color_2, italic = true })
   hi('Comment',                  { fg = p.color_5, italic = true })
   hi('Constant',                 { fg = p.color_2 })
@@ -73,9 +73,9 @@ local function enable_colorscheme()
   hi('CursorLineNr',             { fg = p.color_0, bg = p.gray_9, bold = true })
   hi('CursorLineSign',           { bg = p.gray_9 })
   hi('DiffAdd',                  { bg = p.dark_green })
-  hi('DiffChange',               { bg = p.dark_blue })
+  hi('DiffChange',               { bg = p.dark_cyan })
   hi('DiffDelete',               { bg = p.dark_red })
-  hi('DiffText',                 { bg = p.dark_cyan })
+  hi('DiffText',                 { bg = p.dark_yellow })
   hi('Directory',                { fg = p.color_3, bold = true })
   hi('EndOfBuffer',              { fg = p.gray_6 })
   hi('ErrorMsg',                 { fg = p.light_red })
@@ -86,6 +86,7 @@ local function enable_colorscheme()
   hi('IncSearch',                { fg = p.gray_11, bg = p.gray_0, bold = true })
   hi('LineNr',                   { fg = p.color_5 })
   hi('LspInlayHint',             { fg = p.gray_5, bg = p.gray_9 })
+  hi('LspReferenceText',         { bg = p.gray_9 })
   hi('MatchParen',               { fg = p.gray_0, bg = p.gray_6 })
   hi('ModeMsg',                  { fg = p.gray_0, bg = p.gray_11, bold = true })
   hi('MoreMsg',                  { fg = p.light_green, bold = true })
@@ -113,8 +114,7 @@ local function enable_colorscheme()
   hi('TabLineSel',               { bold = true })
   hi('TermCursor',               { fg = p.gray_9, bg = p.gray_0 })
   hi('Title',                    { fg = p.gray_3, bold = true })
-  hi('Todo',                     { bold = true, underline = true })
-  hi('Visual',                   { fg = p.gray_11, bg = p.color_1 })
+  hi('Visual',                   { fg = p.gray_11, bg = p.color_2 })
   hi('WarningMsg',               { fg = p.light_yellow })
   hi('Whitespace',               { fg = p.gray_9 })
   hi('WildMenu',                 { fg = p.gray_11, bg = p.gray_6 })
@@ -125,12 +125,12 @@ local function enable_colorscheme()
 
   hi('DiagnosticError',          { fg = p.light_red })
   hi('DiagnosticHint',           { fg = p.light_magenta })
-  hi('DiagnosticInfo',           { fg = p.light_blue })
+  hi('DiagnosticInfo',           { fg = p.light_cyan })
   hi('DiagnosticOk',             { fg = p.light_green })
   hi('DiagnosticWarn',           { fg = p.light_yellow })
   hi('DiagnosticUnderlineError', { undercurl = true, sp = p.light_red })
   hi('DiagnosticUnderlineHint',  { undercurl = true, sp = p.light_magenta })
-  hi('DiagnosticUnderlineInfo',  { undercurl = true, sp = p.light_blue })
+  hi('DiagnosticUnderlineInfo',  { undercurl = true, sp = p.light_cyan })
   hi('DiagnosticUnderlineOk',    { undercurl = true, sp = p.light_green })
   hi('DiagnosticUnderlineWarn',  { undercurl = true, sp = p.light_yellow })
 
