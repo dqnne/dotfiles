@@ -1,10 +1,11 @@
 ---@diagnostic disable: undefined-global
 vim.pack.add({
+  'https://github.com/tpope/vim-dispatch',
   'https://github.com/rafamadriz/friendly-snippets',
-  'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/stevearc/oil.nvim',
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
 })
 
 -- OPTIONS =====================================================================
@@ -64,10 +65,6 @@ map('n', '<leader>d', vim.diagnostic.setqflist, { desc = 'Add diagnostics to qui
 
 map('n', '<leader>e', '<cmd>Oil<cr>', { desc = 'Explore directory' })
 
-map('n', '<leader>t', '<cmd>tab terminal<cr>', { desc = 'Open terminal in tab' })
-map('n', '<leader>s', '<cmd>horizontal terminal<cr>', { desc = 'Open terminal in horizontal split' })
-map('n', '<leader>v', '<cmd>vertical terminal<cr>', { desc = 'Open terminal in vertical split' })
-
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 map('n', 'gq<cr>', 'mzgggqG`z', { desc = 'Format buffer' })
@@ -91,9 +88,15 @@ map('n', '<leader>q', function()
   vim.cmd.copen()
 end, { desc = 'Toggle quickfix window' })
 
--- Compile ---------------------------------------------------------------------
-map('n', '<leader>c', '<cmd>Compile<cr>', { desc = 'Compile' })
-map('n', '<leader>m', '<cmd>SetMakeprg<cr>', { desc = 'Set makeprg' })
+map('n', '<leader>m', function()
+  vim.ui.input({
+    prompt = 'makeprg: ',
+    default = vim.bo.makeprg,
+    completion = 'shellcmdline',
+  }, function(input)
+    if input then vim.bo.makeprg = vim.fn.expandcmd(input) end
+  end)
+end, { desc = 'Set makeprg' })
 
 -- Picker ----------------------------------------------------------------------
 map('n', '<leader>/', '<cmd>Pick grep_live<cr>', { desc = 'Grep live' })
@@ -110,6 +113,10 @@ require('oil').setup({
     'mtime',
     'size',
     'icon',
+  },
+  keymaps = {
+    ['`'] = false,
+    ['='] = { 'actions.cd', mode = 'n' },
   },
 })
 
