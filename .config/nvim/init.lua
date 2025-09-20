@@ -67,7 +67,9 @@ map('n', '<leader>d', vim.diagnostic.setqflist, { desc = 'Add diagnostics to qui
 
 map('n', '<leader>e', '<cmd>Oil<cr>', { desc = 'Explore directory' })
 
-map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+map('n', '<esc>', '<cmd>nohlsearch<cr>')
+
+map('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Exit terminal mode' })
 
 map('n', 'gq<cr>', 'mzgggqG`z', { desc = 'Format buffer' })
 map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>', { desc = 'Formatter status' })
@@ -75,10 +77,10 @@ map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>', { desc = 'Formatter statu
 map('x', '<', '<gv', { desc = 'Shift left (keep selection)' })
 map('x', '>', '>gv', { desc = 'Shift right (keep selection)' })
 
-map('n', '<C-left>', '<C-w>5<', { desc = 'Decrease window width' })
-map('n', '<C-down>', '<C-w>-', { desc = 'Decrease window height' })
-map('n', '<C-up>', '<C-w>+', { desc = 'Increase window height' })
-map('n', '<C-right>', '<C-w>5>', { desc = 'Increase window width' })
+map('n', '<c-left>', '<c-w>5<', { desc = 'Decrease window width' })
+map('n', '<c-down>', '<c-w>-', { desc = 'Decrease window height' })
+map('n', '<c-up>', '<c-w>+', { desc = 'Increase window height' })
+map('n', '<c-right>', '<c-w>5>', { desc = 'Increase window width' })
 
 map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>', { desc = 'Toggle diff overlay' })
 
@@ -144,7 +146,7 @@ vim.ui.select = MiniPick.ui_select
 MiniPick.registry.nvim = function() return MiniPick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } }) end
 
 local wipeout_cur = function() vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, { force = true }) end
-local buffer_mappings = { wipeout = { char = '<C-d>', func = wipeout_cur } }
+local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
 MiniPick.registry.buffers = function() return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings }) end
 
 -- Treesitter ------------------------------------------------------------------
