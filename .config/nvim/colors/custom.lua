@@ -1,4 +1,3 @@
--- Color palette
 local p = {
   color_0 = '#cee5e5',
   color_1 = '#b7cccc',
@@ -134,7 +133,6 @@ local function enable_colorscheme()
   hi('DiagnosticUnderlineOk',    { undercurl = true, sp = p.light_green })
   hi('DiagnosticUnderlineWarn',  { undercurl = true, sp = p.light_yellow })
 
-  -- Treesitter ----------------------------------------------------------------
   hi('@text.literal',            { link='Comment' })
   hi('@text.reference',          { link='Identifier' })
   hi('@text.title',              { link='Title' })

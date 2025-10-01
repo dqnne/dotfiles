@@ -12,7 +12,6 @@ vim.pack.add({
 vim.g.mapleader = ' '
 vim.g.markdown_folding = 1
 
--- Editing
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.clipboard = 'unnamedplus'
@@ -25,7 +24,6 @@ vim.o.virtualedit = 'block'
 vim.o.breakindent = true
 vim.o.smartindent = true
 
--- UI
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = 'yes'
@@ -60,25 +58,25 @@ vim.cmd.colorscheme('custom')
 -- KEYMAPS =====================================================================
 local map = vim.keymap.set
 
-map('n', '<leader>o', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
-map('n', '<leader>d', vim.diagnostic.setqflist, { desc = 'Add diagnostics to quickfix list' })
+map('n', '<leader>o', vim.diagnostic.open_float)
+map('n', '<leader>d', vim.diagnostic.setqflist)
 
-map('n', '<leader>e', '<cmd>Oil<cr>', { desc = 'Explore directory' })
+map('n', '<leader>e', '<cmd>Oil<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
-map('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Exit terminal mode' })
+map('t', '<esc><esc>', '<c-\\><c-n>')
 
-map('n', 'gq<cr>', 'mzgggqG`z', { desc = 'Format buffer' })
-map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>', { desc = 'Formatter status' })
+map('n', 'gq<cr>', 'mzgggqG`z')
+map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>')
 
-map('x', '<', '<gv', { desc = 'Shift left (keep selection)' })
-map('x', '>', '>gv', { desc = 'Shift right (keep selection)' })
+map('x', '<', '<gv')
+map('x', '>', '>gv')
 
-map('n', '<c-left>', '<c-w>5<', { desc = 'Decrease window width' })
-map('n', '<c-down>', '<c-w>-', { desc = 'Decrease window height' })
-map('n', '<c-up>', '<c-w>+', { desc = 'Increase window height' })
-map('n', '<c-right>', '<c-w>5>', { desc = 'Increase window width' })
+map('n', '<c-left>', '<c-w>5<')
+map('n', '<c-down>', '<c-w>-')
+map('n', '<c-up>', '<c-w>+')
+map('n', '<c-right>', '<c-w>5>')
 
 
 map('n', '<leader>q', function()
@@ -99,13 +97,12 @@ map('n', '<leader>m', function()
   end)
 end, { desc = 'Set makeprg' })
 
--- Picker ----------------------------------------------------------------------
-map('n', '<leader>/', '<cmd>Pick grep_live<cr>', { desc = 'Grep live' })
-map('n', '<leader>a', '<cmd>Pick buffers<cr>', { desc = 'Pick buffers' })
-map('n', '<leader>f', '<cmd>Pick files<cr>', { desc = 'Pick files' })
-map('n', '<leader>h', '<cmd>Pick help<cr>', { desc = 'Pick help' })
-map('n', '<leader>n', '<cmd>Pick nvim<cr>', { desc = 'Pick nvim config files' })
-map('n', '<leader>r', '<cmd>Pick resume<cr>', { desc = 'Pick resume' })
+map('n', '<leader>/', '<cmd>Pick grep_live<cr>')
+map('n', '<leader>a', '<cmd>Pick buffers<cr>')
+map('n', '<leader>f', '<cmd>Pick files<cr>')
+map('n', '<leader>n', '<cmd>Pick nvim<cr>')
+map('n', '<leader>p', '<cmd>Pick help<cr>')
+map('n', '<leader>r', '<cmd>Pick resume<cr>')
 
 -- PLUGINS =====================================================================
 require('oil').setup({
@@ -121,7 +118,6 @@ require('oil').setup({
   },
 })
 
--- Mini ------------------------------------------------------------------------
 require('mini.ai').setup()
 require('mini.completion').setup()
 require('mini.icons').setup()
@@ -145,8 +141,6 @@ local wipeout_cur = function() vim.api.nvim_buf_delete(MiniPick.get_picker_match
 local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
 MiniPick.registry.buffers = function() return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings }) end
 
--- Treesitter ------------------------------------------------------------------
--- Ensure installed
 -- stylua: ignore
 local ensure_installed = {
   'comment','cpp', 'css', 'diff', 'go', 'html',
@@ -165,14 +159,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp', {}),
   callback = function(ev)
-    map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'LSP code action' })
-    map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'LSP declaration' })
-    map('n', '<leader>lS', vim.lsp.buf.document_symbol, { desc = 'LSP document symbols' })
-    map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'LSP definition' })
-    map('n', '<leader>ln', vim.lsp.buf.rename, { desc = 'LSP rename' })
-    map('n', '<leader>lr', vim.lsp.buf.references, { desc = 'LSP references' })
-    map('n', '<leader>ls', vim.lsp.buf.workspace_symbol, { desc = 'LSP workspace symbols' })
-    map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'LSP type definition' })
+    map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action)
+    map('n', '<leader>lD', vim.lsp.buf.declaration)
+    map('n', '<leader>lS', vim.lsp.buf.document_symbol)
+    map('n', '<leader>ld', vim.lsp.buf.definition)
+    map('n', '<leader>ln', vim.lsp.buf.rename)
+    map('n', '<leader>lr', vim.lsp.buf.references)
+    map('n', '<leader>ls', vim.lsp.buf.workspace_symbol)
+    map('n', '<leader>lt', vim.lsp.buf.type_definition)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client:supports_method('textDocument/inlayHint', ev.buf) then
@@ -180,13 +174,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
         'n',
         '<leader>lh',
         function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-        { desc = 'LSP toggle inlay hints' }
+        { desc = 'Toggle LSP inlay hints' }
       )
     end
   end,
 })
 
--- Autostart highlighting if parser exists
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('treesitter-autostart', {}),
   callback = function(ev)
@@ -194,7 +187,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Treesitter update hook
 vim.api.nvim_create_autocmd('PackChanged', {
   group = vim.api.nvim_create_augroup('treesitter-update', {}),
   callback = function(ev)
