@@ -165,9 +165,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp', {}),
   callback = function(ev)
     map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action)
-    map('n', '<leader>lD', vim.lsp.buf.declaration)
-    map('n', '<leader>lS', vim.lsp.buf.document_symbol)
-    map('n', '<leader>ld', vim.lsp.buf.definition)
+    map('n', '<leader>li', vim.lsp.buf.implementation)
     map('n', '<leader>ln', vim.lsp.buf.rename)
     map('n', '<leader>lr', vim.lsp.buf.references)
     map('n', '<leader>ls', vim.lsp.buf.workspace_symbol)
