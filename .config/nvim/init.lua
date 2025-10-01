@@ -80,7 +80,6 @@ map('n', '<c-down>', '<c-w>-', { desc = 'Decrease window height' })
 map('n', '<c-up>', '<c-w>+', { desc = 'Increase window height' })
 map('n', '<c-right>', '<c-w>5>', { desc = 'Increase window width' })
 
-map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>', { desc = 'Toggle diff overlay' })
 
 map('n', '<leader>q', function()
   local cur_tabnr = vim.fn.tabpagenr()
@@ -125,7 +124,6 @@ require('oil').setup({
 -- Mini ------------------------------------------------------------------------
 require('mini.ai').setup()
 require('mini.completion').setup()
-require('mini.diff').setup()
 require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
