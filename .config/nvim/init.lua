@@ -78,6 +78,11 @@ map('n', '<c-down>', '<c-w>-')
 map('n', '<c-up>', '<c-w>+')
 map('n', '<c-right>', '<c-w>5>')
 
+map('c', '<c-a>', '<home>')
+map('c', '<c-b>', '<left>')
+map('c', '<c-f>', '<right>')
+map('c', '<c-x><c-a>', '<c-a>')
+map('c', '<c-x><c-f>', '<c-f>')
 
 map('n', '<leader>q', function()
   local cur_tabnr = vim.fn.tabpagenr()
