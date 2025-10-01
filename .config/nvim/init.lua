@@ -61,7 +61,7 @@ local map = vim.keymap.set
 map('n', '<leader>o', vim.diagnostic.open_float)
 map('n', '<leader>d', vim.diagnostic.setqflist)
 
-map('n', '<leader>e', '<cmd>Oil<cr>')
+map('n', '<leader>e', '<cmd>Oil --float<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
