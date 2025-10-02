@@ -58,7 +58,6 @@ vim.cmd.colorscheme('custom')
 -- KEYMAPS =====================================================================
 local map = vim.keymap.set
 
-map('n', '<leader>o', vim.diagnostic.open_float)
 map('n', '<leader>d', vim.diagnostic.setqflist)
 
 map('n', '<leader>e', '<cmd>Oil --float<cr>')
