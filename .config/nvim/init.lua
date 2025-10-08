@@ -1,11 +1,11 @@
 ---@diagnostic disable: undefined-global
 vim.pack.add({
-  'https://github.com/tpope/vim-dispatch',
   'https://github.com/rafamadriz/friendly-snippets',
-  'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/nvim-mini/mini.nvim',
-  'https://github.com/stevearc/oil.nvim',
+  'https://github.com/neovim/nvim-lspconfig',
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  'https://github.com/stevearc/oil.nvim',
+  'https://github.com/tpope/vim-dispatch',
 })
 
 -- OPTIONS =====================================================================
