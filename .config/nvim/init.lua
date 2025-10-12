@@ -62,7 +62,6 @@ map('n', '<leader>d', vim.diagnostic.setqflist)
 
 map('n', '<leader>e', '<cmd>Oil --float<cr>')
 
-map({ 'n', 'x' }, '<leader>n', ':norm ')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
@@ -107,7 +106,7 @@ map('n', '<leader>/', '<cmd>Pick grep_live<cr>')
 map('n', '<leader>a', '<cmd>Pick buffers<cr>')
 map('n', '<leader>f', '<cmd>Pick files<cr>')
 map('n', '<leader>h', '<cmd>Pick help<cr>')
-map('n', '<leader>p', '<cmd>Pick nvim<cr>')
+map('n', '<leader>n', '<cmd>Pick nvim<cr>')
 map('n', '<leader>r', '<cmd>Pick resume<cr>')
 
 -- PLUGINS =====================================================================
