@@ -8,6 +8,8 @@ vim.pack.add({
   'https://github.com/tpope/vim-dispatch',
 })
 
+vim.cmd.packadd('nvim.undotree')
+
 -- OPTIONS =====================================================================
 vim.g.mapleader = ' '
 vim.g.markdown_folding = 1
@@ -62,6 +64,7 @@ map('n', '<leader>d', vim.diagnostic.setqflist)
 
 map('n', '<leader>e', '<cmd>Oil --float<cr>')
 
+map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
