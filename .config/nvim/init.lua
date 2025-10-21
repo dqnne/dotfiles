@@ -62,7 +62,7 @@ local map = vim.keymap.set
 
 map('n', '<leader>d', vim.diagnostic.setqflist)
 
-map('n', '<leader>e', '<cmd>Oil --float<cr>')
+map('n', '-', '<cmd>Oil<cr>')
 
 map('n', '<leader>u', '<cmd>Undotree<cr>')
 
@@ -113,19 +113,6 @@ map('n', '<leader>n', '<cmd>Pick nvim<cr>')
 map('n', '<leader>r', '<cmd>Pick resume<cr>')
 
 -- PLUGINS =====================================================================
-require('oil').setup({
-  columns = {
-    'permissions',
-    'mtime',
-    'size',
-    'icon',
-  },
-  keymaps = {
-    ['`'] = false,
-    ['='] = { 'actions.cd', mode = 'n' },
-  },
-})
-
 require('mini.ai').setup()
 require('mini.completion').setup()
 require('mini.icons').setup()
@@ -148,6 +135,36 @@ MiniPick.registry.nvim = function() return MiniPick.builtin.files(nil, { source 
 local wipeout_cur = function() vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, { force = true }) end
 local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
 MiniPick.registry.buffers = function() return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings }) end
+
+require('oil').setup({
+  columns = {
+    'permissions',
+    'mtime',
+    'size',
+    'icon',
+  },
+  keymaps = {
+    ['`'] = false,
+    ['='] = { 'actions.cd', mode = 'n' },
+    ['gx'] = false,
+    ['gX'] = 'actions.open_external',
+    ['<c-h>'] = false,
+    ['<c-s>'] = { 'actions.select', opts = { horizontal = true } },
+    ['<c-v>'] = { 'actions.select', opts = { vertical = true } },
+
+    ['<leader>f'] = {
+      function()
+        MiniPick.builtin.files(nil, {
+          source = {
+            cwd = require('oil').get_current_dir(),
+          },
+        })
+      end,
+      mode = 'n',
+      nowait = true,
+    },
+  },
+})
 
 -- stylua: ignore
 local ensure_installed = {
