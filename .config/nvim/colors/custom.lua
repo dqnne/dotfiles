@@ -1,17 +1,17 @@
 local p = {
-  fg = '#edf0f2',
+  fg = '#edefea',
   fg2 = '#dbd9d0',
-  fg3 = '#c5c9bd',
-  fg4 = '#aebab0',
-  fg5 = '#99a2a3',
-  fg6 = '#86898e',
+  fg3 = '#cec6b9',
+  fg4 = '#bab9a7',
+  fg5 = '#9ca29c',
+  fg6 = '#838a8b',
 
-  bg = '#0a0f14',
-  bg2 = '#161a21',
-  bg3 = '#272c33',
-  bg4 = '#3f424c',
-  bg5 = '#545860',
-  bg6 = '#686d72',
+  bg = '#090f12',
+  bg2 = '#182126',
+  bg3 = '#273136',
+  bg4 = '#3c4b4f',
+  bg5 = '#5b605a',
+  bg6 = '#626e70',
 
   light_red = '#b77979',
   light_green = '#79b779',
@@ -40,7 +40,7 @@ local function enable_colorscheme()
   hi('Changed',                  { fg = p.light_cyan })
   hi('Character',                { fg = p.fg4, italic = true })
   hi('Comment',                  { fg = p.bg5, italic = true })
-  hi('Constant',                 { fg = p.fg4 })
+  hi('Constant',                 { fg = p.fg5 })
   hi('Delimiter',                { fg = p.bg6 })
   hi('Error',                    { fg = p.light_red })
   hi('Float',                    { fg = p.fg4 })
@@ -60,15 +60,15 @@ local function enable_colorscheme()
   hi('Conceal',                  { fg = p.fg6, bold = true, italic = true })
   hi('CurSearch',                { fg = p.bg, bg = p.fg, bold = true })
   hi('Cursor',                   { fg = p.bg, bg = p.fg2 })
-  hi('CursorColumn',             { bg = p.bg3 })
-  hi('CursorLine',               { bg = p.bg3 })
-  hi('CursorLineNr',             { fg = p.fg2, bg = p.bg3, bold = true })
-  hi('CursorLineSign',           { bg = p.bg3 })
+  hi('CursorColumn',             { bg = p.bg2 })
+  hi('CursorLine',               { bg = p.bg2 })
+  hi('CursorLineNr',             { fg = p.fg2, bg = p.bg2, bold = true })
+  hi('CursorLineSign',           { bg = p.bg2 })
   hi('DiffAdd',                  { bg = p.dark_green })
   hi('DiffChange',               { bg = p.dark_cyan })
   hi('DiffDelete',               { bg = p.dark_red })
   hi('DiffText',                 { bg = p.dark_yellow })
-  hi('Directory',                { fg = p.fg4 })
+  hi('Directory',                { fg = p.fg5 })
   hi('EndOfBuffer',              { fg = p.bg6 })
   hi('ErrorMsg',                 { fg = p.light_red })
   hi('FloatBorder',              { fg = p.bg5 })
@@ -76,7 +76,7 @@ local function enable_colorscheme()
   hi('FoldColumn',               { fg = p.fg6 })
   hi('Folded',                   { fg = p.fg3 })
   hi('IncSearch',                { fg = p.bg, bg = p.fg, bold = true })
-  hi('LineNr',                   { fg = p.bg5 })
+  hi('LineNr',                   { fg = p.bg4 })
   hi('LspInlayHint',             { fg = p.fg6, bg = p.bg3 })
   hi('LspReferenceText',         { bg = p.bg3 })
   hi('MatchParen',               { fg = p.fg, bg = p.bg5 })
@@ -84,13 +84,13 @@ local function enable_colorscheme()
   hi('MoreMsg',                  { fg = p.light_green, bold = true })
   hi('NonText',                  { fg = p.bg4 })
   hi('Normal',                   { fg = p.fg2, bg = p.bg })
-  hi('NormalFloat',              { bg = p.bg2 })
-  hi('Pmenu',                    { bg = p.bg4 })
-  hi('PmenuSbar',                { bg = p.bg6 })
+  hi('NormalFloat',              { bg = p.bg })
+  hi('Pmenu',                    { bg = p.bg3 })
+  hi('PmenuSbar',                { bg = p.bg4 })
   hi('PmenuSel',                 { bg = p.bg5 })
-  hi('PmenuThumb',               { bg = p.fg6 })
+  hi('PmenuThumb',               { bg = p.bg6 })
   hi('Question',                 { fg = p.light_green, bold = true })
-  hi('QuickFixLine',             { fg = p.fg2 })
+  hi('QuickFixLine',             { fg = p.fg4 })
   hi('Search',                   { fg = p.fg, bg = p.bg6 })
   hi('SignColumn',               { fg = p.fg6 })
   hi('SpecialKey',               { fg = p.bg6, italic = true })
@@ -99,20 +99,20 @@ local function enable_colorscheme()
   hi('SpellLocal',               { fg = p.light_red, undercurl = true })
   hi('SpellRare',                { fg = p.light_red, undercurl = true })
   hi('StatusLine',               { fg = p.fg5, bg = p.bg3 })
-  hi('StatusLineNC',             { fg = p.bg6, bg = p.bg3 })
+  hi('StatusLineNC',             { fg = p.fg6, bg = p.bg3 })
   hi('Substitute',               { fg = p.fg, bg = p.fg6 })
   hi('TabLine',                  { fg = p.fg3, bg = p.bg4 })
   hi('TabLineFill',              { fg = p.fg2, bg = p.bg3 })
   hi('TabLineSel',               { bold = true })
   hi('TermCursor',               { fg = p.bg3, bg = p.fg })
   hi('Title',                    { fg = p.fg4, bold = true })
-  hi('Visual',                   { bg = p.bg4 })
+  hi('Visual',                   { bg = p.bg3 })
   hi('WarningMsg',               { fg = p.light_yellow })
   hi('Whitespace',               { fg = p.bg3 })
   hi('WildMenu',                 { fg = p.bg, bg = p.bg6 })
   hi('WinBar',                   { fg = p.fg4, bg = p.bg4 })
   hi('WinBarNC',                 { fg = p.fg2, bg = p.bg3 })
-  hi('WinSeparator',             { fg = p.bg5, bg = p.bg3 })
+  hi('WinSeparator',             { fg = p.bg5, bg = p.bg2 })
   hi('lCursor',                  { fg = p.bg3, bg = p.fg3 })
 
   hi('DiagnosticError',          { fg = p.light_red })
