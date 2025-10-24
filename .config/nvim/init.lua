@@ -168,8 +168,7 @@ require('oil').setup({
 
 -- stylua: ignore
 local ensure_installed = {
-  'comment','cpp', 'css', 'diff', 'go', 'html',
-  'python', 'regex', 'rust', 'toml', 'yaml', 'zig',
+  'bash', 'comment', 'cpp', 'json', 'python', 'regex', 'rust', 'zig',
 }
 local isnt_installed = function(lang) return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0 end
 local to_install = vim.tbl_filter(isnt_installed, ensure_installed)
