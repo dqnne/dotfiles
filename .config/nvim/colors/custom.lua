@@ -2,7 +2,7 @@ local p = {
   fg = '#edefea',
   fg2 = '#dbd9d0',
   fg3 = '#cec6b9',
-  fg4 = '#bab9a7',
+  fg4 = '#b8baa7',
   fg5 = '#9ca29c',
   fg6 = '#838a8b',
 
@@ -106,13 +106,13 @@ local function enable_colorscheme()
   hi('TabLineSel',               { bold = true })
   hi('TermCursor',               { fg = p.bg3, bg = p.fg })
   hi('Title',                    { fg = p.fg4, bold = true })
-  hi('Visual',                   { bg = p.bg3 })
+  hi('Visual',                   { bg = p.bg4 })
   hi('WarningMsg',               { fg = p.light_yellow })
   hi('Whitespace',               { fg = p.bg3 })
   hi('WildMenu',                 { fg = p.bg, bg = p.bg6 })
   hi('WinBar',                   { fg = p.fg4, bg = p.bg4 })
   hi('WinBarNC',                 { fg = p.fg2, bg = p.bg3 })
-  hi('WinSeparator',             { fg = p.bg5, bg = p.bg2 })
+  hi('WinSeparator',             { fg = p.bg5, bg = p.bg3 })
   hi('lCursor',                  { fg = p.bg3, bg = p.fg3 })
 
   hi('DiagnosticError',          { fg = p.light_red })
