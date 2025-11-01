@@ -101,7 +101,7 @@ map('n', '<leader>m', function()
     default = vim.bo.makeprg,
     completion = 'shellcmdline',
   }, function(input)
-    if input then vim.bo.makeprg = vim.fn.expandcmd(input) end
+    if input then vim.bo.makeprg = input end
   end)
 end, { desc = 'Set makeprg' })
 
