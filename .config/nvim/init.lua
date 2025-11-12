@@ -6,6 +6,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-dispatch',
+  'https://github.com/tpope/vim-sleuth',
 })
 
 vim.cmd.packadd('nvim.undotree')
@@ -25,6 +26,9 @@ vim.o.smartcase = true
 vim.o.virtualedit = 'block'
 vim.o.breakindent = true
 vim.o.smartindent = true
+vim.o.shiftwidth = 2
+vim.o.softtabstop = -1
+vim.o.expandtab = true
 
 vim.o.number = true
 vim.o.relativenumber = true
@@ -68,7 +72,8 @@ map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
-map('t', '<esc><esc>', '<c-\\><c-n>')
+map('n', '<leader>s', '<cmd>horizontal terminal<cr>')
+map('n', '<leader>v', '<cmd>vertical terminal<cr>')
 
 map('n', 'gq<cr>', 'mzgggqG`z')
 map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>')
