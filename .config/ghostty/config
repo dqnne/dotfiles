@@ -1,0 +1,5 @@
+theme = custom
+window-theme = ghostty
+font-feature = -calt, -liga, -dlig
+mouse-hide-while-typing = true
+shell-integration-features = ssh-terminfo, ssh-env
