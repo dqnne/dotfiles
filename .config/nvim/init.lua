@@ -5,6 +5,7 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-dispatch',
   'https://github.com/tpope/vim-fugitive',
   'https://github.com/tpope/vim-sleuth',
@@ -79,6 +80,8 @@ vim.cmd.colorscheme('custom')
 local map = vim.keymap.set
 
 map('n', '<leader>d', vim.diagnostic.setqflist)
+
+map('n', '-', '<cmd>Oil<cr>')
 
 map('n', '<leader>g', '<cmd>Git<cr>')
 
@@ -175,6 +178,49 @@ local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
 MiniPick.registry.buffers = function()
   return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings })
 end
+
+require('oil').setup({
+  columns = {
+    'permissions',
+    'mtime',
+    'size',
+    'icon',
+  },
+  keymaps = {
+    ['<CR>'] = 'actions.select',
+    ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+    ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
+    ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+    ['<C-p>'] = 'actions.preview',
+    ['<C-c>'] = { 'actions.close', mode = 'n' },
+    ['<C-l>'] = 'actions.refresh',
+    ['-'] = { 'actions.parent', mode = 'n' },
+    ['_'] = { 'actions.open_cwd', mode = 'n' },
+    ['='] = { 'actions.cd', mode = 'n' },
+    ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+    ['gS'] = { 'actions.change_sort', mode = 'n' },
+    ['gX'] = 'actions.open_external',
+    ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
+    ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
+    ['<leader>f'] = {
+      function()
+        MiniPick.builtin.files(nil, { source = { cwd = require('oil').get_current_dir() } })
+      end,
+      mode = 'n',
+      nowait = true,
+      desc = 'Find files in the current directory',
+    },
+    ['<leader>/'] = {
+      function()
+        MiniPick.builtin.grep_live(nil, { source = { cwd = require('oil').get_current_dir() } })
+      end,
+      mode = 'n',
+      nowait = true,
+      desc = 'Grep live in the current directory',
+    },
+  },
+  use_default_keymaps = false,
+})
 
 -- stylua: ignore
 local ensure_installed = {
