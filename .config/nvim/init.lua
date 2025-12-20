@@ -26,6 +26,7 @@ vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.completeopt = 'menuone,noselect,fuzzy,nosort'
 vim.o.expandtab = true
+vim.o.exrc = true
 vim.o.ignorecase = true
 vim.o.infercase = true
 vim.o.pumheight = 10
