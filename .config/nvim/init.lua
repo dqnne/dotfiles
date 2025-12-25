@@ -149,6 +149,11 @@ map('n', '<leader>h', '<cmd>Pick help<cr>')
 map('n', '<leader>n', '<cmd>Pick nvim<cr>')
 map('n', '<leader>r', '<cmd>Pick resume<cr>')
 
+map('n', '<leader>wd', '<cmd>lua MiniSessions.select("delete")<cr>')
+map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: "))<cr>')
+map('n', '<leader>wr', '<cmd>lua MiniSessions.select("read")<cr>')
+map('n', '<leader>ww', '<cmd>lua MiniSessions.write()<cr>')
+
 -- PLUGINS =====================================================================
 
 require('mini.ai').setup()
@@ -157,6 +162,7 @@ require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
+require('mini.sessions').setup()
 require('mini.surround').setup()
 
 local snippets = require('mini.snippets')
