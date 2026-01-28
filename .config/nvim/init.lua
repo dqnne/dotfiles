@@ -38,6 +38,7 @@ vim.o.timeoutlen = 300
 vim.o.undofile = true
 vim.o.updatetime = 250
 vim.o.virtualedit = 'block'
+vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.wildcharm = ('\t'):byte()
 vim.o.wildoptions = 'pum,tagfile,fuzzy'
 
