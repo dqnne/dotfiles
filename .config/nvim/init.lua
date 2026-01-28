@@ -72,7 +72,7 @@ vim.lsp.enable({
   'clangd',
   'lua_ls',
   'rust_analyzer',
-  'ty',
+  'basedpyright',
 })
 
 vim.cmd.colorscheme('custom')
