@@ -30,6 +30,7 @@ vim.o.exrc = true
 vim.o.ignorecase = true
 vim.o.infercase = true
 vim.o.pumheight = 10
+vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.shiftwidth = 2
 vim.o.smartcase = true
 vim.o.smartindent = true
@@ -38,7 +39,6 @@ vim.o.timeoutlen = 300
 vim.o.undofile = true
 vim.o.updatetime = 250
 vim.o.virtualedit = 'block'
-vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.wildcharm = ('\t'):byte()
 vim.o.wildoptions = 'pum,tagfile,fuzzy'
 
@@ -69,10 +69,11 @@ vim.opt.listchars = {
 vim.diagnostic.config({ virtual_text = { current_line = true, severity = { min = 1, max = 1 } } })
 
 vim.lsp.enable({
+  'basedpyright',
   'clangd',
+  'hls',
   'lua_ls',
   'rust_analyzer',
-  'basedpyright',
 })
 
 vim.cmd.colorscheme('custom')
