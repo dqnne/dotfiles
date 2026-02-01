@@ -39,7 +39,6 @@ vim.o.timeoutlen = 300
 vim.o.undofile = true
 vim.o.updatetime = 250
 vim.o.virtualedit = 'block'
-vim.o.wildcharm = ('\t'):byte()
 vim.o.wildoptions = 'pum,tagfile,fuzzy'
 
 vim.o.cursorline = true
@@ -97,12 +96,6 @@ map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
 map('n', '<leader>s', '<cmd>horizontal terminal<cr>')
 map('n', '<leader>v', '<cmd>vertical terminal<cr>')
-
-map('n', '<leader>ee', ':e %:p:h/<tab>')
-map('n', '<leader>es', ':sp %:p:h/<tab>')
-map('n', '<leader>ev', ':vs %:p:h/<tab>')
-
-map('n', '<leader>i', ':cd %:p:h<tab>')
 
 map('n', '<leader>c', '<cmd>cc<cr>')
 
