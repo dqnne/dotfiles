@@ -74,6 +74,7 @@ vim.lsp.enable({
   'hls',
   'lua_ls',
   'rust_analyzer',
+  'tinymist',
 })
 
 vim.cmd.colorscheme('custom')
@@ -233,7 +234,7 @@ require('oil').setup({
 
 -- stylua: ignore
 local ensure_installed = {
-  'bash', 'comment', 'cpp', 'diff', 'haskell', 'json', 'python', 'regex', 'rust', 'zig',
+  'bash', 'comment', 'cpp', 'diff', 'haskell', 'json', 'python', 'regex', 'rust', 'typst', 'zig',
 }
 local isnt_installed = function(lang)
   return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
