@@ -88,14 +88,12 @@ map('n', '-', '<cmd>Oil<cr>')
 
 map('n', '<leader>g', '<cmd>Git<cr>')
 
-map('n', '<leader>x', ':Start -wait=always ')
-
 map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
-map('n', '<leader>s', '<cmd>horizontal terminal<cr>')
-map('n', '<leader>v', '<cmd>vertical terminal<cr>')
+map('n', '<leader>ts', '<cmd>horizontal terminal<cr>')
+map('n', '<leader>tv', '<cmd>vertical terminal<cr>')
 
 map('n', '<leader>c', '<cmd>cc<cr>')
 
@@ -137,6 +135,18 @@ map('n', '<leader>m', function()
     end
   end)
 end, { desc = 'Set makeprg' })
+
+map('n', '<leader>s', function()
+  vim.ui.input({
+    prompt = 'b:start = ',
+    default = vim.b.start,
+    completion = 'shellcmdline',
+  }, function(input)
+    if input then
+      vim.b.start = input
+    end
+  end)
+end, { desc = 'Set b:start' })
 
 map('n', '<leader>/', '<cmd>Pick grep_live<cr>')
 map('n', '<leader>a', '<cmd>Pick buffers<cr>')
