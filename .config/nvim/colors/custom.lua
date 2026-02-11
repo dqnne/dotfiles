@@ -1,10 +1,10 @@
 local palette = require('mini.hues').make_palette({
-  background = '#101214',
-  foreground = '#e5ddce',
+  background = '#0e1214',
+  foreground = '#d8d4cd',
 })
 
-palette.accent = '#e5ddce'
-palette.accent_bg = '#202428'
+palette.accent = '#d8d4cd'
+palette.accent_bg = '#1c2428'
 
 require('mini.hues').apply_palette(palette)
 vim.g.colors_name = 'custom'
