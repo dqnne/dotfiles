@@ -7,7 +7,6 @@ vim.pack.add({
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-dispatch',
-  'https://github.com/tpope/vim-fugitive',
   'https://github.com/tpope/vim-sleuth',
 })
 
@@ -86,8 +85,6 @@ map('n', '<leader>d', vim.diagnostic.setqflist)
 
 map('n', '-', '<cmd>Oil<cr>')
 
-map('n', '<leader>g', '<cmd>Git<cr>')
-
 map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
@@ -160,10 +157,13 @@ map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: 
 map('n', '<leader>wr', '<cmd>lua MiniSessions.select("read")<cr>')
 map('n', '<leader>ww', '<cmd>lua MiniSessions.write()<cr>')
 
+map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
+
 -- PLUGINS =====================================================================
 
 require('mini.ai').setup()
 require('mini.completion').setup()
+require('mini.diff').setup()
 require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
