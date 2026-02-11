@@ -235,17 +235,7 @@ require('oil').setup({
   use_default_keymaps = false,
 })
 
--- stylua: ignore
-local ensure_installed = {
-  'bash', 'comment', 'cpp', 'diff', 'haskell', 'json', 'python', 'regex', 'rust', 'typst', 'zig',
-}
-local isnt_installed = function(lang)
-  return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) == 0
-end
-local to_install = vim.tbl_filter(isnt_installed, ensure_installed)
-if #to_install > 0 then
-  require('nvim-treesitter').install(to_install)
-end
+require('nvim-treesitter').install({ 'comment', 'diff' })
 
 -- Autocommands ================================================================
 
