@@ -235,7 +235,7 @@ require('oil').setup({
   use_default_keymaps = false,
 })
 
-require('nvim-treesitter').install({ 'comment', 'diff' })
+require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 
 -- Autocommands ================================================================
 
