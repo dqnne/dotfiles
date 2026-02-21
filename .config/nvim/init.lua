@@ -34,9 +34,9 @@ vim.o.shiftwidth = 2
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.softtabstop = -1
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 500
 vim.o.undofile = true
-vim.o.updatetime = 250
+vim.o.updatetime = 1000
 vim.o.virtualedit = 'block'
 vim.o.wildoptions = 'pum,tagfile,fuzzy'
 
@@ -54,6 +54,8 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.tabclose = 'left'
 vim.o.winborder = 'rounded'
+vim.o.wrap = false
+
 vim.opt.listchars = {
   lead = ' ',
   multispace = '··',
