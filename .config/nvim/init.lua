@@ -12,8 +12,6 @@ vim.pack.add({
 
 vim.cmd.packadd('nvim.undotree')
 
-require('vim._extui').enable({})
-
 -- OPTIONS =====================================================================
 
 vim.g.mapleader = ' '
