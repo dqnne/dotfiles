@@ -16,10 +16,6 @@
       "rev": "f47f549f74cea5d5f25a5205c9e127cd882f1d20",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
-    "oil.nvim": {
-      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
-      "src": "https://github.com/stevearc/oil.nvim"
-    },
     "vim-dispatch": {
       "rev": "a2ff28a",
       "src": "https://github.com/tpope/vim-dispatch"

@@ -5,7 +5,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/nvim-treesitter/nvim-treesitter',
-  'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-dispatch',
   'https://github.com/tpope/vim-sleuth',
 })
@@ -36,6 +35,7 @@ vim.o.timeoutlen = 500
 vim.o.undofile = true
 vim.o.updatetime = 1000
 vim.o.virtualedit = 'block'
+vim.o.wildcharm = ('\t'):byte()
 vim.o.wildoptions = 'pum,tagfile,fuzzy'
 
 vim.o.cursorline = true
@@ -83,8 +83,6 @@ local map = vim.keymap.set
 
 map('n', '<leader>d', vim.diagnostic.setqflist)
 
-map('n', '-', '<cmd>Oil<cr>')
-
 map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
@@ -99,6 +97,12 @@ map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>')
 
 map('x', '<', '<gv')
 map('x', '>', '>gv')
+
+map('n', '<leader>ee', ':e %:p:h/<tab>')
+map('n', '<leader>es', ':sp %:p:h/<tab>')
+map('n', '<leader>ev', ':vs %:p:h/<tab>')
+
+map('n', '<leader>i', ':cd %:p:h/<tab>')
 
 map('n', '<c-left>', '<c-w>5<')
 map('n', '<c-down>', '<c-w>-')
@@ -135,7 +139,7 @@ end, { desc = 'Set makeprg' })
 
 map('n', '<leader>s', function()
   vim.ui.input({
-    prompt = 'b:start = ',
+    prompt = 'Start command: ',
     default = vim.b.start,
     completion = 'shellcmdline',
   }, function(input)
@@ -191,49 +195,6 @@ local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
 MiniPick.registry.buffers = function()
   return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings })
 end
-
-require('oil').setup({
-  columns = {
-    'permissions',
-    'mtime',
-    'size',
-    'icon',
-  },
-  keymaps = {
-    ['<cr>'] = 'actions.select',
-    ['<c-v>'] = { 'actions.select', opts = { vertical = true } },
-    ['<c-s>'] = { 'actions.select', opts = { horizontal = true } },
-    ['<c-t>'] = { 'actions.select', opts = { tab = true } },
-    ['<c-p>'] = 'actions.preview',
-    ['<c-c>'] = { 'actions.close', mode = 'n' },
-    ['<c-l>'] = 'actions.refresh',
-    ['-'] = { 'actions.parent', mode = 'n' },
-    ['_'] = { 'actions.open_cwd', mode = 'n' },
-    ['='] = { 'actions.cd', mode = 'n' },
-    ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
-    ['gS'] = { 'actions.change_sort', mode = 'n' },
-    ['gX'] = 'actions.open_external',
-    ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
-    ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
-    ['<leader>f'] = {
-      function()
-        MiniPick.builtin.files(nil, { source = { cwd = require('oil').get_current_dir() } })
-      end,
-      mode = 'n',
-      nowait = true,
-      desc = 'Find files in the current directory',
-    },
-    ['<leader>/'] = {
-      function()
-        MiniPick.builtin.grep_live(nil, { source = { cwd = require('oil').get_current_dir() } })
-      end,
-      mode = 'n',
-      nowait = true,
-      desc = 'Grep live in the current directory',
-    },
-  },
-  use_default_keymaps = false,
-})
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 
