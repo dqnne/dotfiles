@@ -229,7 +229,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('treesitter-autostart', {}),
   callback = function(ev)
-    if pcall(vim.treesitter.get_parser, ev.buf) then
+    if vim.treesitter.get_parser(ev.buf) then
       vim.treesitter.start(ev.buf)
     end
   end,
