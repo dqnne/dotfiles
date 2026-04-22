@@ -166,6 +166,7 @@ map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 -- PLUGINS =====================================================================
 
 require('mini.ai').setup()
+require('mini.align').setup()
 require('mini.completion').setup()
 require('mini.diff').setup()
 require('mini.icons').setup()
