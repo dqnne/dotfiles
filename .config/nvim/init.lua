@@ -102,7 +102,7 @@ map('n', '<leader>ee', ':e %:p:h/<tab>')
 map('n', '<leader>es', ':sp %:p:h/<tab>')
 map('n', '<leader>ev', ':vs %:p:h/<tab>')
 
-map('n', '<leader>i', ':cd %:p:h/<tab>')
+map('n', '<leader>i', ':cd %:p:h<tab>')
 
 map('n', '<c-left>', '<c-w>5<')
 map('n', '<c-down>', '<c-w>-')
