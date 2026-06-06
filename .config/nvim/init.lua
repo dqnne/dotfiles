@@ -204,7 +204,7 @@ require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight-yank', {}),
   callback = function()
-    vim.hl.on_yank()
+    vim.hl.hl_op()
   end,
 })
 
