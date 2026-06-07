@@ -7,6 +7,7 @@ vim.pack.add({
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/tpope/vim-dispatch',
   'https://github.com/tpope/vim-sleuth',
+  'https://github.com/zenbones-theme/zenbones.nvim',
 })
 
 vim.cmd.packadd('nvim.undotree')
@@ -17,6 +18,7 @@ vim.g.mapleader = ' '
 vim.g.markdown_folding = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.neobones_compat = 1
 
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
@@ -75,7 +77,7 @@ vim.lsp.enable({
   'tinymist',
 })
 
-vim.cmd.colorscheme('custom')
+vim.cmd.colorscheme('neobones')
 
 -- KEYMAPS =====================================================================
 
@@ -199,7 +201,7 @@ end
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 
--- Autocommands ================================================================
+-- AUTOCOMMANDS ================================================================
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight-yank', {}),

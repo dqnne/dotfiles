@@ -23,6 +23,10 @@
     "vim-sleuth": {
       "rev": "be69bff",
       "src": "https://github.com/tpope/vim-sleuth"
+    },
+    "zenbones.nvim": {
+      "rev": "239bdb9a09c8d38c752c43590d02f654ed0da2b0",
+      "src": "https://github.com/zenbones-theme/zenbones.nvim"
     }
   }
 }

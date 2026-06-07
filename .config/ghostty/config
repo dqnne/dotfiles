@@ -1,4 +1,4 @@
-theme = custom
+theme = Neobones Dark
 window-theme = ghostty
 font-feature = -calt, -liga, -dlig
 mouse-hide-while-typing = true
