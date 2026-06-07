@@ -1,7 +1,6 @@
 ---@diagnostic disable: undefined-global
 
 vim.pack.add({
-  'https://github.com/rafamadriz/friendly-snippets',
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/nvim-treesitter/nvim-treesitter',
@@ -21,9 +20,12 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.neobones_compat = 1
 
+vim.o.autocomplete = true
+vim.o.autocompletedelay = 250
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort'
+vim.o.complete = '.,w,b,o'
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort,popup'
 vim.o.expandtab = true
 vim.o.exrc = true
 vim.o.ignorecase = true
@@ -170,21 +172,12 @@ map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 
 require('mini.ai').setup()
 require('mini.align').setup()
-require('mini.completion').setup()
 require('mini.diff').setup()
-require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.surround').setup()
-
-local snippets = require('mini.snippets')
-snippets.setup({
-  snippets = {
-    snippets.gen_loader.from_lang(),
-  },
-})
 
 vim.ui.select = MiniPick.ui_select
 
@@ -227,6 +220,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, { desc = 'Toggle LSP inlay hints' })
     end
+
+    map('i', '<c-s>', function()
+      vim.lsp.buf.signature_help({ anchor_bias = 'above', silent = true, zindex = 100 })
+    end)
   end,
 })
 
