@@ -86,16 +86,12 @@ vim.cmd.colorscheme('neobones')
 
 local map = vim.keymap.set
 
-map('n', '<leader>d', vim.diagnostic.setqflist)
-
 map('n', '<leader>u', '<cmd>Undotree<cr>')
 
 map('n', '<esc>', '<cmd>nohlsearch<cr>')
 
 map('n', '<leader>ts', '<cmd>horizontal terminal<cr>')
 map('n', '<leader>tv', '<cmd>vertical terminal<cr>')
-
-map('n', '<leader>c', '<cmd>cc<cr>')
 
 map('n', 'gq<cr>', 'mzgggqG`z')
 map('n', 'gq?', '<cmd>set formatprg? formatexpr?<cr>')
@@ -120,7 +116,8 @@ map('c', '<c-f>', '<right>')
 map('c', '<c-x><c-a>', '<c-a>')
 map('c', '<c-x><c-f>', '<c-f>')
 
-map('n', '<leader>q', function()
+map('n', '<leader>qd', vim.diagnostic.setqflist)
+map('n', '<leader>qt', function()
   local cur_tabnr = vim.fn.tabpagenr()
   for _, wininfo in ipairs(vim.fn.getwininfo()) do
     if wininfo.quickfix == 1 and wininfo.tabnr == cur_tabnr then
