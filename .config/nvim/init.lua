@@ -198,7 +198,14 @@ require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight-yank', {}),
   callback = function()
-    vim.hl.hl_op()
+    vim.hl.hl_op({ higroup = 'IncSearch' })
+  end,
+})
+
+vim.api.nvim_create_autocmd('TextPutPost', {
+  group = vim.api.nvim_create_augroup('highlight-put', {}),
+  callback = function()
+    vim.hl.hl_op({ higroup = 'Visual' })
   end,
 })
 
