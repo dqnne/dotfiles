@@ -4,7 +4,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/nvim-treesitter/nvim-treesitter',
-  'https://github.com/brianhuster/unnest.nvim',
   'https://github.com/tpope/vim-dispatch',
   'https://github.com/tpope/vim-sleuth',
   'https://github.com/zenbones-theme/zenbones.nvim',
@@ -163,13 +162,15 @@ map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: 
 map('n', '<leader>wr', '<cmd>lua MiniSessions.select("read")<cr>')
 map('n', '<leader>ww', '<cmd>lua MiniSessions.write()<cr>')
 
-map('n', '<leader>g', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
+map({ 'n', 'x' }, '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<cr>')
+map('n', '<leader>go', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 
 -- PLUGINS =====================================================================
 
 require('mini.ai').setup()
 require('mini.align').setup()
 require('mini.diff').setup()
+require('mini.git').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()

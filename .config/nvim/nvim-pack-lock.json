@@ -12,10 +12,6 @@
       "rev": "2b50ab5ccbcd9e5708deb351308edd738adbf84c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
-    "unnest.nvim": {
-      "rev": "865b34a9db70ad4ea8715a397fad6491baa390c4",
-      "src": "https://github.com/brianhuster/unnest.nvim"
-    },
     "vim-dispatch": {
       "rev": "a2ff28a",
       "src": "https://github.com/tpope/vim-dispatch"
