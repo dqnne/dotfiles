@@ -10,6 +10,8 @@ vim.pack.add({
 
 vim.cmd.packadd('nvim.undotree')
 
+require('vim._core.ui2').enable({})
+
 -- OPTIONS =====================================================================
 
 vim.g.mapleader = ' '
