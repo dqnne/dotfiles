@@ -3,7 +3,6 @@
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
-  'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/tpope/vim-dispatch',
   'https://github.com/tpope/vim-sleuth',
   'https://github.com/zenbones-theme/zenbones.nvim',
@@ -191,8 +190,6 @@ MiniPick.registry.buffers = function()
   return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings })
 end
 
-require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
-
 -- AUTOCOMMANDS ================================================================
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -237,15 +234,6 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(ev)
     if vim.treesitter.get_parser(ev.buf) then
       vim.treesitter.start(ev.buf)
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd('PackChanged', {
-  group = vim.api.nvim_create_augroup('treesitter-update', {}),
-  callback = function(ev)
-    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then
-      vim.cmd('TSUpdate')
     end
   end,
 })
