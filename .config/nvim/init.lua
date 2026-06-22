@@ -1,5 +1,3 @@
----@diagnostic disable: undefined-global
-
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
@@ -174,22 +172,24 @@ require('mini.diff').setup()
 require('mini.git').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
-require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.surround').setup()
 
-vim.ui.select = MiniPick.ui_select
+local pick = require('mini.pick')
+pick.setup({ source = { show = pick.default_show } })
 
-MiniPick.registry.nvim = function()
-  return MiniPick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } })
+vim.ui.select = pick.ui_select
+
+pick.registry.nvim = function()
+  return pick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } })
 end
 
 local wipeout_cur = function()
-  vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, { force = true })
+  vim.api.nvim_buf_delete(pick.get_picker_matches().current.bufnr, { force = true })
 end
 local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
-MiniPick.registry.buffers = function()
-  return MiniPick.builtin.buffers(nil, { mappings = buffer_mappings })
+pick.registry.buffers = function()
+  return pick.builtin.buffers(nil, { mappings = buffer_mappings })
 end
 
 -- AUTOCOMMANDS ================================================================
