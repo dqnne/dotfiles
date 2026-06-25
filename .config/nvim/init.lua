@@ -17,7 +17,7 @@ vim.g.mapleader = ' '
 vim.g.markdown_folding = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.neobones_compat = 1
+vim.g.bones_compat = 1
 
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
