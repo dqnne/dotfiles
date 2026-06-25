@@ -1,4 +1,5 @@
 vim.pack.add({
+  'https://github.com/rafamadriz/friendly-snippets',
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/tpope/vim-dispatch',
@@ -18,12 +19,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.neobones_compat = 1
 
-vim.o.autocomplete = true
-vim.o.autocompletedelay = 250
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
-vim.o.complete = '.,w,b,o'
-vim.o.completeopt = 'menuone,noselect,fuzzy,nosort,popup'
+vim.o.complete = '.,w,b,u'
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort'
 vim.o.expandtab = true
 vim.o.exrc = true
 vim.o.ignorecase = true
@@ -31,6 +30,7 @@ vim.o.infercase = true
 vim.o.pumheight = 10
 vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.shiftwidth = 2
+vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.softtabstop = -1
@@ -168,15 +168,24 @@ map('n', '<leader>go', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 
 require('mini.ai').setup()
 require('mini.align').setup()
+require('mini.completion').setup()
 require('mini.diff').setup()
 require('mini.git').setup()
+require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
 require('mini.sessions').setup()
 require('mini.surround').setup()
 
+local snippets = require('mini.snippets')
+snippets.setup({
+  snippets = {
+    snippets.gen_loader.from_lang(),
+  },
+})
+
 local pick = require('mini.pick')
-pick.setup({ source = { show = pick.default_show } })
+pick.setup()
 
 vim.ui.select = pick.ui_select
 
@@ -224,10 +233,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end, { desc = 'Toggle LSP inlay hints' })
     end
-
-    map('i', '<c-s>', function()
-      vim.lsp.buf.signature_help({ anchor_bias = 'above', silent = true, zindex = 100 })
-    end)
   end,
 })
 
