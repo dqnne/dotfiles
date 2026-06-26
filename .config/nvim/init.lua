@@ -241,6 +241,13 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(ev)
     if vim.treesitter.get_parser(ev.buf) then
       vim.treesitter.start(ev.buf)
+
+      map({ 'n', 'x' }, '<c-/>', function()
+        vim.treesitter.select('parent')
+      end, { buf = ev.buf })
+      map({ 'n', 'x' }, '<c-.>', function()
+        vim.treesitter.select('child')
+      end, { buf = ev.buf })
     end
   end,
 })
