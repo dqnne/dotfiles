@@ -154,15 +154,21 @@ map('n', '<leader>a', '<cmd>Pick buffers<cr>')
 map('n', '<leader>f', '<cmd>Pick files<cr>')
 map('n', '<leader>h', '<cmd>Pick help<cr>')
 map('n', '<leader>n', '<cmd>Pick nvim<cr>')
+map('n', '<leader>o', '<cmd>Pick oldfiles<cr>')
 map('n', '<leader>r', '<cmd>Pick resume<cr>')
+
+map('n', '<leader>gc', '<cmd>Pick git_commits<cr>')
+map('n', '<leader>gC', '<cmd>Pick git_commits path="%"<cr>')
+map('n', '<leader>gh', '<cmd>Pick git_hunks scope="unstaged"<cr>')
+map('n', '<leader>gH', '<cmd>Pick git_hunks scope="staged"<cr>')
+
+map({ 'n', 'x' }, '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<cr>')
+map('n', '<leader>go', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 
 map('n', '<leader>wd', '<cmd>lua MiniSessions.select("delete")<cr>')
 map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: "))<cr>')
 map('n', '<leader>wr', '<cmd>lua MiniSessions.select("read")<cr>')
 map('n', '<leader>ww', '<cmd>lua MiniSessions.write()<cr>')
-
-map({ 'n', 'x' }, '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<cr>')
-map('n', '<leader>go', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
 
 -- PLUGINS =====================================================================
 
@@ -170,6 +176,7 @@ require('mini.ai').setup()
 require('mini.align').setup()
 require('mini.completion').setup()
 require('mini.diff').setup()
+require('mini.extra').setup()
 require('mini.git').setup()
 require('mini.icons').setup()
 require('mini.operators').setup()
@@ -221,10 +228,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp', {}),
   callback = function(ev)
     map({ 'n', 'x' }, '<leader>la', vim.lsp.buf.code_action)
-    map('n', '<leader>li', vim.lsp.buf.implementation)
+    map('n', '<leader>li', '<cmd>Pick lsp scope="implementation"<cr>')
     map('n', '<leader>ln', vim.lsp.buf.rename)
-    map('n', '<leader>lr', vim.lsp.buf.references)
-    map('n', '<leader>ls', vim.lsp.buf.workspace_symbol)
+    map('n', '<leader>lr', '<cmd>Pick lsp scope="references"<cr>')
+    map('n', '<leader>ls', '<cmd>Pick lsp scope="workspace_symbol_live"<cr>')
     map('n', '<leader>lt', vim.lsp.buf.type_definition)
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
