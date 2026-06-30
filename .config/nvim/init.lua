@@ -31,6 +31,7 @@ vim.o.pumheight = 10
 vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.shiftwidth = 2
 vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.showmode = false
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.softtabstop = -1
@@ -182,6 +183,7 @@ require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
 require('mini.sessions').setup()
+require('mini.statusline').setup()
 require('mini.surround').setup()
 
 local snippets = require('mini.snippets')
