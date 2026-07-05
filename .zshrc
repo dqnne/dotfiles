@@ -9,7 +9,7 @@ zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
 
-PS1='%B%2F%n%f%b %B%4F%m%f%b%6F[%~]%f%(?.%2F.%1F)%(!.#.$)%f '
+PS1=$'\033]133;A\007%B%2F%n%f%b %B%4F%m%f%b%6F[%~]%f%(?.%2F.%1F)%(!.#.$)%f '
 
 export EDITOR=nvim
 export VISUAL=nvim
