@@ -68,7 +68,12 @@ vim.opt.listchars = {
   precedes = '<',
 }
 
-vim.diagnostic.config({ virtual_text = { current_line = true, severity = { min = 1, max = 1 } } })
+vim.diagnostic.config({
+  virtual_text = {
+    current_line = true,
+    severity = { min = vim.diagnostic.severity.ERROR, max = vim.diagnostic.severity.ERROR },
+  },
+})
 
 vim.lsp.enable({
   'basedpyright',
