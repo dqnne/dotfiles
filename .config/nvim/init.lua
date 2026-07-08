@@ -48,6 +48,7 @@ vim.o.foldmethod = 'indent'
 vim.o.linebreak = true
 vim.o.list = true
 vim.o.number = true
+vim.o.pumblend = 10
 vim.o.relativenumber = true
 vim.o.scrolloff = 5
 vim.o.sidescrolloff = 5
@@ -55,6 +56,7 @@ vim.o.signcolumn = 'yes'
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.tabclose = 'left'
+vim.o.winblend = 10
 vim.o.winborder = 'rounded'
 vim.o.wrap = false
 
