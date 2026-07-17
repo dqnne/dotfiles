@@ -1,4 +1,4 @@
-theme = Neobones Dark
+theme = Nvim Dark
 window-theme = ghostty
 font-feature = -calt, -liga, -dlig
 mouse-hide-while-typing = true
