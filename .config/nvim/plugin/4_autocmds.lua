@@ -35,6 +35,15 @@ autocmd('LspAttach', {
   end,
 })
 
+autocmd('PackChanged', {
+  group = augroup('pack-hooks', {}),
+  callback = function(ev)
+    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then
+      vim.cmd('TSUpdate')
+    end
+  end,
+})
+
 autocmd('FileType', {
   group = augroup('treesitter-autostart', {}),
   callback = function(ev)
