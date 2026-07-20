@@ -38,8 +38,8 @@ local yank_hash = function()
   vim.fn.setreg(register, pick.get_picker_matches().current:match('%x+'))
 end
 local commit_mappings = { yank = { char = '<c-y>', func = yank_hash } }
-pick.registry.git_commits = function()
-  return extra.pickers.git_commits(nil, { mappings = commit_mappings })
+pick.registry.git_commits = function(local_opts)
+  return extra.pickers.git_commits(local_opts, { mappings = commit_mappings })
 end
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
