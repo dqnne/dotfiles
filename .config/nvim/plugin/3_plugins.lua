@@ -1,7 +1,6 @@
 require('mini.ai').setup()
 require('mini.align').setup()
 require('mini.completion').setup()
-require('mini.git').setup()
 require('mini.icons').setup()
 require('mini.operators').setup()
 require('mini.pairs').setup()
@@ -43,19 +42,6 @@ pick.registry.git_commits = function(local_opts)
 end
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
-
-vim.g.diffs = {
-  conflict = {
-    keymaps = {
-      ours = '<leader>co',
-      theirs = '<leader>ct',
-      both = '<leader>cb',
-      none = '<leader>cn',
-      next = ']x',
-      prev = '[x',
-    },
-  },
-}
 
 vim.g.guard_config = {
   fmt_on_save = false,

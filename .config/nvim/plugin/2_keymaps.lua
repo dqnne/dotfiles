@@ -79,11 +79,6 @@ map('n', '<leader>gC', '<cmd>Pick git_commits path="%"<cr>')
 map('n', '<leader>gh', '<cmd>Pick git_hunks scope="unstaged"<cr>')
 map('n', '<leader>gH', '<cmd>Pick git_hunks scope="staged"<cr>')
 
-map({ 'n', 'x' }, '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<cr>')
-map('n', '<leader>go', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
-
-map('n', '<leader>d', ':Diff ')
-
 map('n', '<leader>wd', '<cmd>lua MiniSessions.select("delete")<cr>')
 map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: "))<cr>')
 map('n', '<leader>wr', '<cmd>lua MiniSessions.select("read")<cr>')

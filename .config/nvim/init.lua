@@ -1,5 +1,4 @@
 vim.pack.add({
-  'https://github.com/barrettruth/diffs.nvim',
   'https://github.com/rafamadriz/friendly-snippets',
   'https://github.com/nvimdev/guard-collection',
   'https://github.com/nvimdev/guard.nvim',
@@ -7,6 +6,7 @@ vim.pack.add({
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/tpope/vim-dispatch',
+  'https://github.com/tpope/vim-fugitive',
   'https://github.com/tpope/vim-eunuch',
   'https://github.com/tpope/vim-sleuth',
 })
