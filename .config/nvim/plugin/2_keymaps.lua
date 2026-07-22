@@ -41,11 +41,11 @@ end, { desc = 'Toggle quickfix window' })
 map('n', '<leader>m', function()
   vim.ui.input({
     prompt = 'makeprg: ',
-    default = vim.o.makeprg,
+    default = vim.api.nvim_get_option_value('makeprg', {}),
     completion = 'shellcmdline',
   }, function(input)
     if input then
-      vim.o.makeprg = input
+      vim.api.nvim_set_option_value('makeprg', input, {})
     end
   end)
 end, { desc = 'Set makeprg' })
