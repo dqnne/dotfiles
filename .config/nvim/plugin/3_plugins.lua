@@ -36,9 +36,43 @@ local yank_hash = function()
   local register = vim.o.clipboard:find('unnamedplus') and '+' or vim.o.clipboard:find('unnamed') and '*' or '"'
   vim.fn.setreg(register, pick.get_picker_matches().current:match('%x+'))
 end
-local commit_mappings = { yank = { char = '<c-y>', func = yank_hash } }
+local diff_commit = function()
+  local commit = pick.get_picker_matches().current:match('%x+')
+  pick.stop()
+  vim.schedule(function()
+    vim.api.nvim_cmd({ cmd = 'Git', args = { 'difftool -y ' .. commit .. '~..' .. commit } }, {})
+  end)
+end
+local commit_mappings = { yank = { char = '<c-y>', func = yank_hash }, diff = { char = '<c-d>', func = diff_commit } }
 pick.registry.git_commits = function(local_opts)
   return extra.pickers.git_commits(local_opts, { mappings = commit_mappings })
+end
+
+local diff_hunk = function(scope)
+  pick.default_choose(pick.get_picker_matches().current)
+  pick.stop()
+  if not scope or scope == 'unstaged' then
+    vim.schedule(function()
+      vim.api.nvim_cmd({ cmd = 'Gdiffsplit' }, {})
+    end)
+  elseif scope == 'staged' then
+    vim.schedule(function()
+      vim.api.nvim_cmd({ cmd = 'Gedit', args = { '@:%' } }, {})
+      vim.api.nvim_cmd({ cmd = 'Gdiffsplit', args = { ':%' } }, {})
+    end)
+  end
+end
+pick.registry.git_hunks = function(local_opts)
+  return extra.pickers.git_hunks(local_opts, {
+    mappings = {
+      diff = {
+        char = '<c-d>',
+        func = function()
+          diff_hunk(local_opts.scope)
+        end,
+      },
+    },
+  })
 end
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
