@@ -5,16 +5,13 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
-vim.o.complete = '.,w,b,u'
 vim.o.completeopt = 'menuone,noselect,fuzzy,nosort'
 vim.o.expandtab = true
 vim.o.exrc = true
 vim.o.ignorecase = true
 vim.o.infercase = true
 vim.o.pumheight = 10
-vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
 vim.o.shiftwidth = 2
-vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.showmode = false
 vim.o.smartcase = true
 vim.o.smartindent = true
@@ -24,7 +21,10 @@ vim.o.undofile = true
 vim.o.updatetime = 1000
 vim.o.virtualedit = 'block'
 vim.o.wildcharm = ('\t'):byte()
-vim.o.wildoptions = 'pum,tagfile,fuzzy'
+vim.opt.complete:remove('t')
+vim.opt.sessionoptions:append('localoptions')
+vim.opt.shortmess:append('c')
+vim.opt.wildoptions:append('fuzzy')
 
 vim.o.cursorline = true
 vim.o.foldlevel = 99
@@ -43,7 +43,7 @@ vim.o.tabclose = 'uselast'
 vim.o.winblend = 10
 vim.o.winborder = 'rounded'
 vim.o.wrap = false
-
+vim.opt.fillchars:append('diff:╱')
 vim.opt.listchars = {
   lead = ' ',
   multispace = '··',
