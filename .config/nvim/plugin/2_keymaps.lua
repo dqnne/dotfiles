@@ -7,6 +7,8 @@ map('n', '<esc>', '<cmd>nohlsearch<cr>')
 map('n', '<leader>ts', '<cmd>horizontal terminal<cr>')
 map('n', '<leader>tv', '<cmd>vertical terminal<cr>')
 
+map('n', 'ZT', '<cmd>tabclose<cr>')
+
 map('x', '<', '<gv')
 map('x', '>', '>gv')
 
