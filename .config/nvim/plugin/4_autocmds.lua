@@ -44,6 +44,23 @@ autocmd('PackChanged', {
   end,
 })
 
+autocmd('WinEnter', {
+  group = augroup('diffupdate', {}),
+  callback = function()
+    if vim.wo.diff then
+      vim.cmd('diffupdate')
+    end
+  end,
+})
+
+autocmd('FileType', {
+  pattern = { 'directory', 'git' },
+  group = augroup('buf-delete', {}),
+  callback = function(ev)
+    vim.bo[ev.buf].bufhidden = 'delete'
+  end,
+})
+
 autocmd('FileType', {
   group = augroup('treesitter-autostart', {}),
   callback = function(ev)
