@@ -57,7 +57,7 @@ local diff_hunk = function(scope)
     end)
   elseif scope == 'staged' then
     vim.schedule(function()
-      vim.api.nvim_cmd({ cmd = 'Gedit', args = { '@:%' } }, {})
+      vim.api.nvim_cmd({ cmd = 'Gtabedit', args = { '@:%' } }, {})
       vim.api.nvim_cmd({ cmd = 'Gdiffsplit', args = { ':%' } }, {})
     end)
   end
