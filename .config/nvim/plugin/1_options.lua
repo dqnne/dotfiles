@@ -27,8 +27,9 @@ vim.opt.shortmess:append('c')
 vim.opt.wildoptions:append('fuzzy')
 
 vim.o.cursorline = true
-vim.o.foldlevel = 99
-vim.o.foldmethod = 'indent'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevelstart = 99
+vim.o.foldmethod = 'expr'
 vim.o.linebreak = true
 vim.o.list = true
 vim.o.number = true
