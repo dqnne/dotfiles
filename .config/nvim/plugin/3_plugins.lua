@@ -36,16 +36,27 @@ local yank_hash = function()
   local register = vim.o.clipboard:find('unnamedplus') and '+' or vim.o.clipboard:find('unnamed') and '*' or '"'
   vim.fn.setreg(register, pick.get_picker_matches().current:match('%x+'))
 end
-local diff_commit = function()
+local diff_commit = function(path)
+  path = path or ''
   local commit = pick.get_picker_matches().current:match('%x+')
   pick.stop()
   vim.schedule(function()
-    vim.api.nvim_cmd({ cmd = 'Git', args = { 'difftool -y ' .. commit .. '~..' .. commit } }, {})
+    vim.api.nvim_cmd({ cmd = 'Git', args = { 'difftool -y ' .. commit .. '~..' .. commit .. ' ' .. path } }, {})
   end)
 end
-local commit_mappings = { yank = { char = '<c-y>', func = yank_hash }, diff = { char = '<c-d>', func = diff_commit } }
 pick.registry.git_commits = function(local_opts)
-  return extra.pickers.git_commits(local_opts, { mappings = commit_mappings })
+  return extra.pickers.git_commits(local_opts, {
+    mappings = {
+      yank = { char = '<c-y>', func = yank_hash },
+      diff = { char = '<c-d>', func = diff_commit },
+      diff_path = {
+        char = '<c-e>',
+        func = function()
+          diff_commit(local_opts.path)
+        end,
+      },
+    },
+  })
 end
 
 local diff_hunk = function(scope)
