@@ -39,15 +39,6 @@ pick.registry.git_commits = function(local_opts)
   local line1, line2 = local_opts.line1, local_opts.line2
   local range = (line1 and git_relpath) and line1 .. ',' .. line2 .. ':' .. git_relpath
 
-  local command = { 'git', 'log', '--format=format:%h %s' }
-  if range then
-    table.insert(command, '--no-patch')
-    table.insert(command, '-L ' .. range)
-  elseif git_relpath then
-    table.insert(command, '--')
-    table.insert(command, git_relpath)
-  end
-
   local preview = function(buf_id, item)
     vim.api.nvim_buf_call(buf_id, function()
       vim.schedule(function()
@@ -57,7 +48,6 @@ pick.registry.git_commits = function(local_opts)
         })
       end)
     end)
-    vim.print(git_relpath and ':' .. git_relpath or '')
   end
   local choose = function(item)
     local win_target = pick.get_picker_state().windows.target
@@ -83,6 +73,15 @@ pick.registry.git_commits = function(local_opts)
         args = { 'difftool -y ' .. commit .. '~..' .. commit .. ' -- ' .. (git_relpath or '') },
       })
     end)
+  end
+
+  local command = { 'git', 'log', '--format=format:%h %s' }
+  if range then
+    table.insert(command, '--no-patch')
+    table.insert(command, '-L ' .. range)
+  elseif git_relpath then
+    table.insert(command, '--')
+    table.insert(command, git_relpath)
   end
 
   local name = string.format('Git commits (%s)', range or git_relpath or 'all')
