@@ -77,7 +77,7 @@ map('n', '<leader>fo', '<cmd>Pick oldfiles<cr>')
 map('n', '<leader>fr', '<cmd>Pick resume<cr>')
 
 map('n', '<leader>gc', '<cmd>Pick git_commits<cr>')
-map('n', '<leader>gC', '<cmd>Pick git_commits path="%:p"<cr>')
+map('n', '<leader>gC', '<cmd>Pick git_commits path="%"<cr>')
 map('n', '<leader>gh', '<cmd>Pick git_hunks scope="unstaged"<cr>')
 map('n', '<leader>gH', '<cmd>Pick git_hunks scope="staged"<cr>')
 
