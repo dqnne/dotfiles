@@ -33,34 +33,23 @@ map('n', '<leader>qd', vim.diagnostic.setqflist)
 map('n', '<leader>qt', function()
   local cur_tabnr = vim.fn.tabpagenr()
   for _, wininfo in ipairs(vim.fn.getwininfo()) do
-    if wininfo.quickfix == 1 and wininfo.tabnr == cur_tabnr then
-      return vim.cmd.cclose()
-    end
+    if wininfo.quickfix == 1 and wininfo.tabnr == cur_tabnr then return vim.cmd.cclose() end
   end
   vim.cmd.copen()
 end, { desc = 'Toggle quickfix window' })
 
 map('n', '<leader>m', function()
-  vim.ui.input({
-    prompt = 'makeprg: ',
-    default = vim.api.nvim_get_option_value('makeprg', {}),
-    completion = 'shellcmdline',
-  }, function(input)
-    if input then
-      vim.api.nvim_set_option_value('makeprg', input, {})
+  vim.ui.input(
+    { prompt = 'makeprg: ', default = vim.api.nvim_get_option_value('makeprg', {}), completion = 'shellcmdline' },
+    function(input)
+      if input then vim.api.nvim_set_option_value('makeprg', input, {}) end
     end
-  end)
+  )
 end, { desc = 'Set makeprg' })
 
 map('n', '<leader>s', function()
-  vim.ui.input({
-    prompt = 'Start command: ',
-    default = vim.b.start,
-    completion = 'shellcmdline',
-  }, function(input)
-    if input then
-      vim.b.start = input
-    end
+  vim.ui.input({ prompt = 'Start command: ', default = vim.b.start, completion = 'shellcmdline' }, function(input)
+    if input then vim.b.start = input end
   end)
 end, { desc = 'Set b:start' })
 
@@ -75,7 +64,6 @@ map('n', '<leader>fh', '<cmd>Pick help<cr>')
 map('n', '<leader>fn', '<cmd>Pick nvim<cr>')
 map('n', '<leader>fo', '<cmd>Pick oldfiles<cr>')
 map('n', '<leader>fr', '<cmd>Pick resume<cr>')
-
 map('n', '<leader>gc', '<cmd>Pick git_commits<cr>')
 map('n', '<leader>gC', '<cmd>Pick git_commits path="%"<cr>')
 map('n', '<leader>gh', '<cmd>Pick git_hunks scope="unstaged"<cr>')

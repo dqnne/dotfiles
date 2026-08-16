@@ -12,25 +12,17 @@ local extra, pick, snippets = require('mini.extra'), require('mini.pick'), requi
 extra.setup()
 pick.setup()
 
-snippets.setup({
-  snippets = {
-    snippets.gen_loader.from_lang(),
-  },
-})
+snippets.setup({ snippets = { snippets.gen_loader.from_lang() } })
 
 vim.ui.select = pick.ui_select
 
-pick.registry.nvim = function()
-  return pick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } })
-end
+pick.registry.nvim = function() return pick.builtin.files(nil, { source = { cwd = vim.fn.stdpath('config') } }) end
 
-local wipeout_cur = function()
-  vim.api.nvim_buf_delete(pick.get_picker_matches().current.bufnr, { force = true })
-end
+local wipeout_cur = function() vim.api.nvim_buf_delete(pick.get_picker_matches().current.bufnr, { force = true }) end
+
 local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
-pick.registry.buffers = function()
-  return pick.builtin.buffers(nil, { mappings = buffer_mappings })
-end
+
+pick.registry.buffers = function() return pick.builtin.buffers(nil, { mappings = buffer_mappings }) end
 
 pick.registry.git_commits = function(local_opts)
   local git_dir = vim.fs.root(0, '.git')
@@ -41,23 +33,27 @@ pick.registry.git_commits = function(local_opts)
 
   local preview = function(buf_id, item)
     vim.api.nvim_buf_call(buf_id, function()
-      vim.schedule(function()
-        vim.api.nvim_cmd({
-          cmd = 'Git',
-          args = { '++curwin show ' .. item:match('^(%x+)') .. ' -- ' .. (git_relpath or '') },
-        })
-      end)
+      vim.schedule(
+        function()
+          vim.api.nvim_cmd({
+            cmd = 'Git',
+            args = { '++curwin show ' .. item:match('^(%x+)') .. ' -- ' .. (git_relpath or '') },
+          })
+        end
+      )
     end)
   end
   local choose = function(item)
     local win_target = pick.get_picker_state().windows.target
     vim.api.nvim_win_call(win_target, function()
-      vim.schedule(function()
-        vim.api.nvim_cmd({
-          cmd = 'Git',
-          args = { '++curwin show ' .. item:match('^(%x+)') .. ' -- ' .. (git_relpath or '') },
-        })
-      end)
+      vim.schedule(
+        function()
+          vim.api.nvim_cmd({
+            cmd = 'Git',
+            args = { '++curwin show ' .. item:match('^(%x+)') .. ' -- ' .. (git_relpath or '') },
+          })
+        end
+      )
     end)
   end
   local yank_hash = function()
@@ -67,12 +63,14 @@ pick.registry.git_commits = function(local_opts)
   local diff_commit = function()
     local commit = pick.get_picker_matches().current:match('^(%x+)')
     pick.stop()
-    vim.schedule(function()
-      vim.api.nvim_cmd({
-        cmd = 'Git',
-        args = { 'difftool -y ' .. commit .. '~..' .. commit .. ' -- ' .. (git_relpath or '') },
-      })
-    end)
+    vim.schedule(
+      function()
+        vim.api.nvim_cmd({
+          cmd = 'Git',
+          args = { 'difftool -y ' .. commit .. '~..' .. commit .. ' -- ' .. (git_relpath or '') },
+        })
+      end
+    )
   end
 
   local command = { 'git', 'log', '--format=format:%h %s' }
@@ -83,15 +81,12 @@ pick.registry.git_commits = function(local_opts)
     table.insert(command, '--')
     table.insert(command, git_relpath)
   end
-
   local name = string.format('Git commits (%s)', range or git_relpath or 'all')
   local source = { name = name, cwd = git_dir, preview = preview, choose = choose }
+
   return pick.builtin.cli({ command = command }, {
     source = source,
-    mappings = {
-      yank = { char = '<c-y>', func = yank_hash },
-      diff = { char = '<c-d>', func = diff_commit },
-    },
+    mappings = { yank = { char = '<c-y>', func = yank_hash }, diff = { char = '<c-d>', func = diff_commit } },
   })
 end
 
@@ -99,9 +94,7 @@ local diff_hunk = function(scope)
   pick.default_choose(pick.get_picker_matches().current)
   pick.stop()
   if not scope or scope == 'unstaged' then
-    vim.schedule(function()
-      vim.api.nvim_cmd({ cmd = 'Gdiffsplit' }, {})
-    end)
+    vim.schedule(function() vim.api.nvim_cmd({ cmd = 'Gdiffsplit' }, {}) end)
   elseif scope == 'staged' then
     vim.schedule(function()
       vim.api.nvim_cmd({ cmd = 'Gtabedit', args = { '@:%' } }, {})
@@ -109,30 +102,23 @@ local diff_hunk = function(scope)
     end)
   end
 end
+
 pick.registry.git_hunks = function(local_opts)
-  return extra.pickers.git_hunks(local_opts, {
-    mappings = {
-      diff = {
-        char = '<c-d>',
-        func = function()
-          diff_hunk(local_opts.scope)
-        end,
-      },
-    },
-  })
+  return extra.pickers.git_hunks(
+    local_opts,
+    { mappings = { diff = { char = '<c-d>', func = function() diff_hunk(local_opts.scope) end } } }
+  )
 end
 
-vim.api.nvim_create_user_command('GpLog', function(args)
-  pick.registry.git_commits({ line1 = args.line1, line2 = args.line2, path = vim.fn.expand('%') })
-end, { range = true })
+vim.api.nvim_create_user_command(
+  'GpLog',
+  function(args) pick.registry.git_commits({ line1 = args.line1, line2 = args.line2, path = vim.fn.expand('%') }) end,
+  { range = true }
+)
 
 require('nvim-treesitter').install({ 'comment', 'diff', 'regex' })
 
-vim.g.guard_config = {
-  fmt_on_save = false,
-  lsp_as_default_formatter = true,
-  save_on_fmt = false,
-}
+vim.g.guard_config = { fmt_on_save = false, lsp_as_default_formatter = true, save_on_fmt = false }
 
 local ft = require('guard.filetype')
 ft('lua'):fmt('stylua')

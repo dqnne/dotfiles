@@ -3,18 +3,8 @@ local augroup = vim.api.nvim_create_augroup
 local map = vim.keymap.set
 
 local hl_ops_group = augroup('highlight-ops', {})
-autocmd('TextYankPost', {
-  group = hl_ops_group,
-  callback = function()
-    vim.hl.hl_op({ higroup = 'IncSearch' })
-  end,
-})
-autocmd('TextPutPost', {
-  group = hl_ops_group,
-  callback = function()
-    vim.hl.hl_op({ higroup = 'Visual' })
-  end,
-})
+autocmd('TextYankPost', { group = hl_ops_group, callback = function() vim.hl.hl_op({ higroup = 'IncSearch' }) end })
+autocmd('TextPutPost', { group = hl_ops_group, callback = function() vim.hl.hl_op({ higroup = 'Visual' }) end })
 
 autocmd('LspAttach', {
   group = augroup('lsp', {}),
@@ -28,9 +18,12 @@ autocmd('LspAttach', {
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client:supports_method('textDocument/inlayHint', ev.buf) then
-      map('n', '<leader>lh', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-      end, { desc = 'Toggle LSP inlay hints' })
+      map(
+        'n',
+        '<leader>lh',
+        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+        { desc = 'Toggle LSP inlay hints' }
+      )
     end
   end,
 })
@@ -38,27 +31,21 @@ autocmd('LspAttach', {
 autocmd('PackChanged', {
   group = augroup('pack-hooks', {}),
   callback = function(ev)
-    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then
-      vim.cmd('TSUpdate')
-    end
+    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'update' then vim.cmd('TSUpdate') end
   end,
 })
 
 autocmd('WinEnter', {
   group = augroup('diffupdate', {}),
   callback = function()
-    if vim.wo.diff then
-      vim.cmd('diffupdate')
-    end
+    if vim.wo.diff then vim.cmd('diffupdate') end
   end,
 })
 
 autocmd('FileType', {
   pattern = { 'directory', 'git' },
   group = augroup('buf-delete', {}),
-  callback = function(ev)
-    vim.bo[ev.buf].bufhidden = 'delete'
-  end,
+  callback = function(ev) vim.bo[ev.buf].bufhidden = 'delete' end,
 })
 
 autocmd('FileType', {
@@ -67,12 +54,8 @@ autocmd('FileType', {
     if vim.treesitter.get_parser(ev.buf) then
       vim.treesitter.start(ev.buf)
 
-      map({ 'n', 'x' }, '<c-/>', function()
-        vim.treesitter.select('parent')
-      end, { buf = ev.buf })
-      map({ 'n', 'x' }, '<c-.>', function()
-        vim.treesitter.select('child')
-      end, { buf = ev.buf })
+      map({ 'n', 'x' }, '<c-/>', function() vim.treesitter.select('parent') end, { buf = ev.buf })
+      map({ 'n', 'x' }, '<c-.>', function() vim.treesitter.select('child') end, { buf = ev.buf })
     end
   end,
 })
