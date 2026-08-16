@@ -10,9 +10,14 @@ require('mini.surround').setup()
 
 local extra, pick, snippets = require('mini.extra'), require('mini.pick'), require('mini.snippets')
 extra.setup()
-pick.setup()
 
 snippets.setup({ snippets = { snippets.gen_loader.from_lang() } })
+
+pick.setup({
+  window = {
+    config = function() return { border = 'solid', height = math.floor(vim.o.lines / 3), width = vim.o.columns } end,
+  },
+})
 
 vim.ui.select = pick.ui_select
 
