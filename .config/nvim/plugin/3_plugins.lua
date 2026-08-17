@@ -99,20 +99,31 @@ local diff_hunk = function(scope)
   pick.default_choose(pick.get_picker_matches().current)
   pick.stop()
   if not scope or scope == 'unstaged' then
-    vim.schedule(function() vim.api.nvim_cmd({ cmd = 'Gdiffsplit' }, {}) end)
+    vim.schedule(function() vim.api.nvim_cmd({ cmd = 'Gdiffsplit' }) end)
   elseif scope == 'staged' then
     vim.schedule(function()
-      vim.api.nvim_cmd({ cmd = 'Gtabedit', args = { '@:%' } }, {})
-      vim.api.nvim_cmd({ cmd = 'Gdiffsplit', args = { ':%' } }, {})
+      vim.api.nvim_cmd({ cmd = 'Gtabedit', args = { '@:%' } })
+      vim.api.nvim_cmd({ cmd = 'Gdiffsplit', args = { ':%' } })
     end)
   end
 end
 
+local stage_file = function(scope)
+  local path = pick.get_picker_matches().current.path
+  if scope == 'unstaged' then
+    vim.schedule(function() vim.api.nvim_cmd({ cmd = 'Git', args = { 'add ' .. path } }) end)
+  elseif scope == 'staged' then
+    vim.schedule(function() vim.api.nvim_cmd({ cmd = 'Git', args = { 'restore --staged ' .. path } }) end)
+  end
+end
+
 pick.registry.git_hunks = function(local_opts)
-  return extra.pickers.git_hunks(
-    local_opts,
-    { mappings = { diff = { char = '<c-d>', func = function() diff_hunk(local_opts.scope) end } } }
-  )
+  return extra.pickers.git_hunks(local_opts, {
+    mappings = {
+      diff = { char = '<c-d>', func = function() diff_hunk(local_opts.scope) end },
+      stage = { char = '<c-y>', func = function() stage_file(local_opts.scope) end },
+    },
+  })
 end
 
 vim.api.nvim_create_user_command(
