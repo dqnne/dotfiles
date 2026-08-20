@@ -40,7 +40,6 @@ vim.o.sidescrolloff = 5
 vim.o.signcolumn = 'yes'
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.tabclose = 'uselast'
 vim.o.winblend = 10
 vim.o.winborder = 'rounded'
 vim.o.wrap = false
