@@ -1,27 +1,27 @@
 {
   "plugins": {
+    "conform.nvim": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "flash.nvim": {
+      "rev": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a",
+      "src": "https://github.com/folke/flash.nvim"
+    },
     "friendly-snippets": {
-      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
-    "guard-collection": {
-      "rev": "edf6c86c06badc972964dadb7fd469022690cbf0",
-      "src": "https://github.com/nvimdev/guard-collection"
-    },
-    "guard.nvim": {
-      "rev": "addb8d2f40662b8b62d60dd7d18f503beb2332e7",
-      "src": "https://github.com/nvimdev/guard.nvim"
-    },
     "mini.nvim": {
-      "rev": "c248713d3530710f67ec804cfbdfcd5b02b19dee",
+      "rev": "66b9e643b6dabe15079be7197ee4b4d59ff98c61",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
+      "rev": "45a3a444b710511c39abca3b60bb6e23a21e3de5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "d3e4a28b63961ba972b0945d66c73b6eec969953",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "vim-dispatch": {
@@ -29,12 +29,8 @@
       "src": "https://github.com/tpope/vim-dispatch"
     },
     "vim-eunuch": {
-      "rev": "e86bb794a1c10a2edac130feb0ea590a00d03f1e",
+      "rev": "929490937745cd96130d3e7948f762f0aa403314",
       "src": "https://github.com/tpope/vim-eunuch"
-    },
-    "vim-fugitive": {
-      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
-      "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-sleuth": {
       "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
