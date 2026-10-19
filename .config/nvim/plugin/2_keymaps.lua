@@ -57,11 +57,6 @@ map({ 'n', 'x' }, '<leader>z', '<cmd>Format<cr>')
 
 map('n', "<c-'>", ':Start -wait=always ')
 
-map({ 'n', 'x', 'o' }, 's', '<cmd>lua require("flash").jump()<cr>')
-map({ 'n', 'x', 'o' }, 'S', '<cmd>lua require("flash").treesitter()<cr>')
-map('o', 'r', '<cmd>lua require("flash").remote()<cr>')
-map({ 'x', 'o' }, 'R', '<cmd>lua require("flash").treesitter_search()<cr>')
-
 map('n', '<leader>fa', '<cmd>Pick buffers<cr>')
 map('n', '<leader>ff', '<cmd>Pick files<cr>')
 map('n', '<leader>fg', '<cmd>Pick grep_live<cr>')
@@ -69,10 +64,13 @@ map('n', '<leader>fh', '<cmd>Pick help<cr>')
 map('n', '<leader>fn', '<cmd>Pick nvim<cr>')
 map('n', '<leader>fo', '<cmd>Pick oldfiles<cr>')
 map('n', '<leader>fr', '<cmd>Pick resume<cr>')
+map('n', '<leader>gc', '<cmd>Pick git_commits<cr>')
+map('n', '<leader>gC', '<cmd>Pick git_commits path="%"<cr>')
 map('n', '<leader>gh', '<cmd>Pick git_hunks scope="unstaged"<cr>')
 map('n', '<leader>gH', '<cmd>Pick git_hunks scope="staged"<cr>')
 
-map('n', '<leader>gd', '<cmd>lua MiniDiff.toggle_overlay()<cr>')
+map('n', '<leader>gd', '<cmd>Gdiffsplit<cr>')
+map('n', '<leader>gD', '<cmd>Gdiffsplit!<cr>')
 
 map('n', '<leader>wd', '<cmd>lua MiniSessions.select("delete")<cr>')
 map('n', '<leader>wn', '<cmd>lua MiniSessions.write(vim.fn.input("Session name: "))<cr>')
